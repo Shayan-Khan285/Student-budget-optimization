@@ -1,0 +1,46 @@
+def student_budget_optimizer():
+    print("--- 🎓 Monthly Student Budget Optimizer ---")
+    
+    try:
+        # Input total monthly allowance/income
+        income = float(input("Enter your total monthly income/allowance: $"))
+        
+        # Define categories and costs
+        expenses = {
+            "Rent/Dorm": float(input("Monthly Rent: $")),
+            "Groceries": float(input("Monthly Groceries: $")),
+            "Utilities/Internet": float(input("Utilities & Phone: $")),
+            "Transport": float(input("Transportation: $")),
+            "Books/Supplies": float(input("Academic Supplies: $")),
+            "Entertainment/Dining": float(input("Social & Fun: $"))
+        }
+
+        total_expenses = sum(expenses.values())
+        remaining = income - total_expenses
+        
+        print("\n" + "="*30)
+        print(f"Total Expenses: ${total_expenses:.2f}")
+        print(f"Remaining Balance: ${remaining:.2f}")
+        print("="*30)
+
+        # Optimization Logic
+        if remaining < 0:
+            print("⚠️ ALERT: You are over budget by ${:.2f}!".format(abs(remaining)))
+            print("👉 Suggestion: Reduce 'Entertainment' or 'Dining' costs.")
+        elif remaining < (0.1 * income):
+            print("💡 TIP: You're close to your limit. Try to save at least 10% for emergencies.")
+        else:
+            savings_goal = income * 0.20
+            print(f"✅ Healthy Budget! You can save ${savings_goal:.2f} (20%) this month.")
+
+        # Breakdown Percentages
+        print("\nExpense Breakdown:")
+        for category, amount in expenses.items():
+            percentage = (amount / income) * 100
+            print(f"- {category}: {percentage:.1f}%")
+
+    except ValueError:
+        print("❌ Error: Please enter valid numerical values.")
+
+if __name__ == "__main__":
+    student_budget_optimizer()
